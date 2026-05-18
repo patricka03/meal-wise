@@ -42,6 +42,11 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "devise"
 gem "simple_form"
+gem "bootstrap", "~> 5.3"
+gem "sprockets-rails"
+gem "sassc-rails"
+gem "font-awesome-sass", "~> 6.1"
+gem "autoprefixer-rails"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
