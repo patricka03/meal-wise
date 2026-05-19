@@ -1,9 +1,13 @@
 <nav class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
 
+    <!-- LOGO -->
+
     <%= link_to "#", class: "navbar-brand" do %>
       <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
     <% end %>
+
+    <!-- MOBILE TOGGLE -->
 
     <button
       class="navbar-toggler"
@@ -15,21 +19,41 @@
       aria-label="Toggle navigation">
 
       <span class="navbar-toggler-icon"></span>
+
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <!-- NAVBAR CONTENT -->
 
-      <ul class="navbar-nav me-auto">
+    <div class="collapse navbar-collapse"
+         id="navbarSupportedContent">
+
+      <ul class="navbar-nav me-auto align-items-center">
 
         <% if user_signed_in? %>
 
+          <!-- HOME -->
+
           <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
+
+            <%= link_to "Home",
+                "#",
+                class: "nav-link fw-semibold text-white" %>
+
           </li>
 
+
+          <!-- RECIPES -->
+
           <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
+
+            <%= link_to "Recipes",
+                "#",
+                class: "nav-link fw-semibold text-white" %>
+
           </li>
+
+
+          <!-- PROFILE DROPDOWN -->
 
           <li class="nav-item dropdown">
 
@@ -46,51 +70,47 @@
 
             </a>
 
-            <div class="dropdown-menu dropdown-menu-end"
+            <div class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 mt-3"
                  aria-labelledby="navbarDropdown">
 
-              <%= link_to "Action", "#", class: "dropdown-item" %>
+              <%= link_to "My Recipes",
+                  "#",
+                  class: "dropdown-item py-2 text-success" %>
 
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "Favourites",
+                  "#",
+                  class: "dropdown-item py-2 text-success" %>
+
+              <%= link_to "Profile",
+                  "#",
+                  class: "dropdown-item py-2 text-success" %>
+
+              <hr>
 
               <%= link_to "Log out",
                   destroy_user_session_path,
                   data: { turbo_method: :delete },
-                  class: "dropdown-item" %>
+                  class: "dropdown-item py-2 text-danger" %>
 
             </div>
+
           </li>
+
+
 
         <% else %>
 
-          <!-- LOGIN BUTTON -->
+          <!-- SIGN IN BUTTON -->
 
           <li class="nav-item me-2">
 
             <button
               type="button"
-              class="btn btn-outline-primary rounded-pill px-4"
+              class="btn btn-outline-success rounded-pill px-4 fw-semibold"
               data-bs-toggle="modal"
               data-bs-target="#loginModal">
 
-              Login
-
-            </button>
-
-          </li>
-
-
-          <!-- SIGNUP BUTTON -->
-
-          <li class="nav-item">
-
-            <button
-              type="button"
-              class="btn btn-primary rounded-pill px-4"
-              data-bs-toggle="modal"
-              data-bs-target="#signupModal">
-
-              Sign up
+              Sign in
 
             </button>
 
@@ -118,12 +138,15 @@
 
     <div class="modal-content border-0 rounded-4 shadow">
 
+      <!-- HEADER -->
+
       <div class="modal-header border-0">
 
-        <h5 class="modal-title fw-bold"
-            id="loginModalLabel">
+        <h5
+          class="modal-title fw-bold"
+          id="loginModalLabel">
 
-          Log in
+          Welcome back
 
         </h5>
 
@@ -136,7 +159,15 @@
 
       </div>
 
+      <!-- BODY -->
+
       <div class="modal-body px-4 pb-4">
+
+        <p class="text-muted mb-4">
+          Log in to continue
+        </p>
+
+        <!-- LOGIN FORM -->
 
         <%= simple_form_for(User.new,
             url: user_session_path) do |f| %>
@@ -144,14 +175,18 @@
           <%= f.input :email,
                       required: false,
                       autofocus: true,
+                      label: "Email",
                       input_html: {
-                        autocomplete: "email"
+                        autocomplete: "email",
+                        class: "rounded-3"
                       } %>
 
           <%= f.input :password,
                       required: false,
+                      label: "Password",
                       input_html: {
-                        autocomplete: "current-password"
+                        autocomplete: "current-password",
+                        class: "rounded-3"
                       } %>
 
           <%= f.input :remember_me,
@@ -159,15 +194,37 @@
 
           <%= f.button :submit,
                        "Log in",
-                       class: "btn btn-primary w-100 rounded-pill" %>
+                       class: "btn btn-success w-100 rounded-pill py-2 fw-semibold mt-3" %>
 
         <% end %>
+
+
+
+        <!-- SIGN UP LINK -->
+
+        <div class="text-center mt-4">
+
+          <span class="text-muted">
+            Don't have an account?
+          </span>
+
+          <button
+            type="button"
+            class="btn btn-link text-success fw-semibold text-decoration-none p-0 ms-1"
+            data-bs-dismiss="modal"
+            data-bs-toggle="modal"
+            data-bs-target="#signupModal">
+
+            Sign up
+
+          </button>
+
+        </div>
 
       </div>
     </div>
   </div>
 </div>
-
 
 
 <!-- SIGNUP MODAL -->
@@ -183,12 +240,15 @@
 
     <div class="modal-content border-0 rounded-4 shadow">
 
+      <!-- HEADER -->
+
       <div class="modal-header border-0">
 
-        <h5 class="modal-title fw-bold"
-            id="signupModalLabel">
+        <h5
+          class="modal-title fw-bold"
+          id="signupModalLabel">
 
-          Sign up
+          Create account
 
         </h5>
 
@@ -201,7 +261,15 @@
 
       </div>
 
+      <!-- BODY -->
+
       <div class="modal-body px-4 pb-4">
+
+        <p class="text-muted mb-4">
+          Join and start saving recipes
+        </p>
+
+        <!-- SIGNUP FORM -->
 
         <%= simple_form_for(User.new,
             url: user_registration_path) do |f| %>
@@ -209,27 +277,54 @@
           <%= f.input :email,
                       required: true,
                       autofocus: true,
+                      label: "Email",
                       input_html: {
-                        autocomplete: "email"
+                        autocomplete: "email",
+                        class: "rounded-3"
                       } %>
 
           <%= f.input :password,
                       required: true,
+                      label: "Password",
                       input_html: {
-                        autocomplete: "new-password"
+                        autocomplete: "new-password",
+                        class: "rounded-3"
                       } %>
 
           <%= f.input :password_confirmation,
                       required: true,
+                      label: "Confirm password",
                       input_html: {
-                        autocomplete: "new-password"
+                        autocomplete: "new-password",
+                        class: "rounded-3"
                       } %>
 
           <%= f.button :submit,
                        "Create account",
-                       class: "btn btn-primary w-100 rounded-pill" %>
+                       class: "btn btn-success w-100 rounded-pill py-2 fw-semibold mt-3" %>
 
         <% end %>
+
+        <!-- LOGIN LINK -->
+
+        <div class="text-center mt-4">
+
+          <span class="text-muted">
+            Already have an account?
+          </span>
+
+          <button
+            type="button"
+            class="btn btn-link text-success fw-semibold text-decoration-none p-0 ms-1"
+            data-bs-dismiss="modal"
+            data-bs-toggle="modal"
+            data-bs-target="#loginModal">
+
+            Log in
+
+          </button>
+
+        </div>
 
       </div>
     </div>
