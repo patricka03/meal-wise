@@ -1,17 +1,46 @@
-<h1>Hello World!!</h1>
-<div class="d-flex justify-content-end ms-3">
+<h1>Meal Wise!!</h1>
+
+<div class="d-flex justify-content-end ms-3 mb-4">
   <% if user_signed_in? %>
-    You are signed in! as <%= current_user.email %>
+    You are signed in as <%= current_user.email %>
   <% else %>
     You are not signed in!
   <% end %>
 </div>
-<ul>
-  <% @recipes.each do |recipe| %>
-    <li> <%= link_to recipe.title, recipe_path(recipe) %> </li>
-  <% end %>
-</ul>
+
+<div class="mt-4">
+  <%= link_to "Create new recipe",
+      new_recipe_path,
+      class: "btn btn-success" %>
+</div>
 
 
-<%= link_to('Create new recipe', new_recipe_path) %>
-<%= link_to "Create new recipe", new_recipe_path , class: "btn btn-magic" %>
+<div class="container">
+  <div class="row">
+    <% @recipes.each do |recipe| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100" style="width: 18rem;">
+
+          <%# Example image placeholder %>
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836"
+               class="card-img-top"
+               alt="Recipe image">
+
+          <div class="card-body">
+            <h5 class="card-title"><%= recipe.title %></h5>
+
+            <%# Optional description if your model has one %>
+            <p class="card-text">
+              <%= truncate(recipe.description, length: 100) %>
+            </p>
+
+            <%= link_to "View Recipe",
+                recipe_path(recipe),
+                class: "btn btn-primary" %>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

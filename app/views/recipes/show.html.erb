@@ -1,14 +1,123 @@
-<h1><%= @recipe.title %></h1>
-<p><%= @recipe.description %></p>
-<p><%= @recipe.ingredients %></p>
-<p><%= @recipe.instructions %></p>
-<p><%= @recipe.cook_time %></p>
-<p><%= @recipe.prep_time %></p>
-<p><%= @recipe.servings %></p>
-<p><%= @recipe.difficulty %></p>
-<p><%= @recipe.category %></p>
-<%= link_to "Edit", edit_recipe_path(@recipe)%>
-<%= link_to "Delete",
-  recipe_path(@recipe),
-  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-%>
+<div class="container mt-5">
+
+  <div class="row justify-content-center">
+
+    <div class="col-12 col-md-8">
+
+      <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+
+        <!-- IMAGE SECTION -->
+
+        <img
+          src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c"
+          class="card-img-top"
+          alt="Recipe image"
+          style="height: 350px; object-fit: cover;">
+
+
+        <!-- CARD BODY -->
+
+        <div class="card-body p-4">
+
+          <!-- TITLE -->
+
+          <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <h1 class="card-title fw-bold mb-0">
+              <%= @recipe.title %>
+            </h1>
+
+            <span class="badge bg-success rounded-pill px-3 py-2">
+              <%= @recipe.category %>
+            </span>
+
+          </div>
+
+
+          <!-- DESCRIPTION -->
+
+          <p class="text-muted fs-5 mb-4">
+            <%= @recipe.description %>
+          </p>
+
+
+
+          <!-- RECIPE INFO -->
+
+          <div class="d-flex gap-3 mb-4 flex-wrap">
+
+            <div class="badge bg-light text-dark p-3 rounded-pill shadow-sm">
+              ⏱ Cook: <%= @recipe.cook_time %> mins
+            </div>
+
+            <div class="badge bg-light text-dark p-3 rounded-pill shadow-sm">
+              🥗 Prep: <%= @recipe.prep_time %> mins
+            </div>
+
+            <div class="badge bg-light text-dark p-3 rounded-pill shadow-sm">
+              🍽 Serves: <%= @recipe.servings %>
+            </div>
+
+            <div class="badge bg-success p-3 rounded-pill shadow-sm">
+              <%= @recipe.difficulty %>
+            </div>
+
+          </div>
+
+
+
+          <!-- INGREDIENTS -->
+
+          <div class="mb-4">
+
+            <h4 class="fw-bold mb-3">
+              Ingredients
+            </h4>
+
+            <p class="text-secondary">
+              <%= @recipe.ingredients %>
+            </p>
+
+          </div>
+
+
+
+          <!-- INSTRUCTIONS -->
+
+          <div class="mb-4">
+
+            <h4 class="fw-bold mb-3">
+              Instructions
+            </h4>
+
+            <p class="text-secondary">
+              <%= @recipe.instructions %>
+            </p>
+
+          </div>
+
+
+
+          <!-- BUTTONS -->
+
+          <div class="d-flex gap-3">
+
+            <%= link_to "Edit",
+                edit_recipe_path(@recipe),
+                class: "btn btn-outline-success rounded-pill px-4" %>
+
+            <%= link_to "Delete",
+                recipe_path(@recipe),
+                data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Are you sure?"
+                },
+                class: "btn btn-danger rounded-pill px-4" %>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
